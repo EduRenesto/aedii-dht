@@ -59,10 +59,10 @@ async fn main() {
     addrs[1].1.send(CtrlAddRoute(addrs[2].0, addrs[2].1.clone())).await.unwrap();
 
     // Add a peer to node 2. 
-    addrs[2].1.send(CtrlAddPeer(addrs[1].0, addrs[4].1.clone())).await.unwrap();
+    addrs[2].1.send(CtrlAddPeer(addrs[2].0, addrs[4].1.clone())).await.unwrap();
 
     // Download file!
-    addrs[0].1.send(CtrlDownloadFile(addrs[1].0)).await.unwrap();
+    addrs[0].1.send(CtrlDownloadFile(addrs[2].0)).await.unwrap();
 
     System::current().stop();
 }
