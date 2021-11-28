@@ -10,6 +10,18 @@ pub struct RoutingTableEntry {
     pub address: Addr<Node>,
 }
 
+impl PartialOrd for RoutingTableEntry {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.node_id.partial_cmp(&other.node_id)
+    }
+}
+
+impl Ord for RoutingTableEntry {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.node_id.cmp(&other.node_id)
+    }
+}
+
 //pub struct RoutingTable(LinkedList<Bucket>);
 pub struct RoutingTable {
     parent_node_id: u128,
@@ -90,5 +102,21 @@ impl RoutingTable {
         let bucket = cursor.current().unwrap();
 
         bucket.nodes.clone()
+    }
+
+    pub fn remove(&mut self, node_id: u128) {
+        let mut cursor = self.buckets.cursor_front_mut();
+
+        while let Some(bucket) = cursor.current() {
+            if bucket.node_in_range(node_id) {
+                break;
+            }
+
+            cursor.move_next();
+        }
+
+        let bucket = cursor.current().unwrap();
+
+        bucket.remove(node_id);
     }
 }

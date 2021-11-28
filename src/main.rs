@@ -14,8 +14,12 @@ use actix::prelude::*;
 pub(crate) mod bucket;
 pub(crate) mod control_methods;
 pub(crate) mod dht_methods;
+pub(crate) mod extra_methods;
 pub(crate) mod node;
 pub(crate) mod routing_table;
+
+#[cfg(test)]
+mod tests;
 
 use control_methods::*;
 use node::*;
@@ -24,7 +28,7 @@ const TOTAL_NODES: usize = 8;
 
 #[actix_rt::main]
 async fn main() {
-    if let Err(_) = std::env::var("RUST_LOG") {
+    if std::env::var("RUST_LOG").is_err() {
         std::env::set_var("RUST_LOG", "debug");
     }
 

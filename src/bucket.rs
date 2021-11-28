@@ -54,4 +54,8 @@ impl Bucket {
             .cloned()
             .find(|entry| entry.node_id == node_id)
     }
+
+    pub fn remove(&mut self, node_id: u128) {
+        self.nodes.retain(|entry| entry.node_id != node_id);
+    }
 }

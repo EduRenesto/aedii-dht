@@ -57,3 +57,26 @@ Os logs gerados mostram bem os *hops*:
  DEBUG dht::control_methods > Node 6D62D178AFB674BCDBF0344E52706ADB found peers to download F74196C56AC16BFE0394FD3E0CB5501B from
  DEBUG dht::node            > Node 445F178ED7B8968E6C01FC68DA0C6982 received announce_peer(F74196C56AC16BFE0394FD3E0CB5501B) from node 6D62D178AFB674BCDBF0344E52706ADB
 ```
+
+### Testes
+
+No arquivo `src/tests.rs`, existem alguns casos de testes ilustrativos
+do funcionamento básico da rede DHT. A saber, os testes são os
+seguintes:
+
+- `one_hop`: simula a publicação e download de um arquivo por nós diferentes;
+- `cant_find`: simula a tentativa de download de um arquivo não
+  existente na rede;
+- `node_removal_crash`: simula a publicação de um arquivo, remoção do
+  nó publicante e subsequente tentativa de outro nó de fazer o
+  download do arquivo, agora inexistente;
+- `node_removal_resilient`: simula a publicação de um arquivo,
+  download desse mesmo arquivo por vários nós, a remoção do nó
+  original, e mostra a resiliência da rede em conseguir resolver o
+  arquivo utilizando os nós restantes.
+  
+Para executar os testes, basta rodar o seguinte comando:
+
+```shell
+$ cargo test
+```

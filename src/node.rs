@@ -28,11 +28,11 @@ impl Actor for Node {
     type Context = Context<Self>;
 
     fn started(&mut self, _ctx: &mut Self::Context) {
-        info!("node {:16X} started", self.node_id);
+        debug!("node {:16X} started", self.node_id);
     }
 
     fn stopped(&mut self, _ctx: &mut Self::Context) {
-        info!("node {:16X} stopped", self.node_id);
+        debug!("node {:16X} stopped", self.node_id);
     }
 }
 
