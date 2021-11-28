@@ -12,7 +12,7 @@ pub struct NodeId(u128);
 
 impl From<u128> for NodeId {
     fn from(id: u128) -> Self {
-	NodeId(id)
+        NodeId(id)
     }
 }
 
@@ -24,7 +24,7 @@ pub struct PeerInfo(pub Addr<Node>);
 
 impl From<RoutingTableEntry> for PeerInfo {
     fn from(entry: RoutingTableEntry) -> Self {
-	PeerInfo(entry.address)
+        PeerInfo(entry.address)
     }
 }
 
@@ -37,19 +37,19 @@ pub struct NodeInfo(pub u128, pub Addr<Node>);
 
 impl PartialOrd for NodeInfo {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-	other.0.partial_cmp(&self.0)
+        other.0.partial_cmp(&self.0)
     }
 }
 
 impl Ord for NodeInfo {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-	other.0.cmp(&self.0)
+        other.0.cmp(&self.0)
     }
 }
 
 impl From<RoutingTableEntry> for NodeInfo {
     fn from(entry: RoutingTableEntry) -> Self {
-	NodeInfo(entry.node_id, entry.address)
+        NodeInfo(entry.node_id, entry.address)
     }
 }
 
